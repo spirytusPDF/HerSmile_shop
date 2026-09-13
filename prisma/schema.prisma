@@ -13,6 +13,7 @@ model Product {
   description String
   price       Float
   brand       String
+  category String @default("product")
 }
 //test DB connection
 //all working
