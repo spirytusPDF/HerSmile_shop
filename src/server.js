@@ -14,6 +14,9 @@ app.get('/api/health', (req, res) => {
 });
 
 app.use('/api/products', productRoutes);
+const authRoutes = require('./routes/authRoutes');
+app.use('/api/auth', authRoutes);
+
 
 
 app.listen(PORT, () => {
