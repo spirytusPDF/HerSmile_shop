@@ -50,6 +50,55 @@ document.addEventListener("DOMContentLoaded", () => {
         if (step) step.style.display = "block";
     }
 
+    const MIN_PASSWORD_LENGTH = 8;
+
+    const STRENGTH_LEVELS = {
+        0: { text: "Weak", color: "#E0E0E0", bars: 0 },
+        1: { text: "Weak", color: "#C0392B", bars: 1 },
+        2: { text: "Medium", color: "#E0A800", bars: 2 },
+        3: { text: "Strong", color: "#2E7D32", bars: 3 }
+    };
+
+    function calcPasswordStrength(password) {
+        if (!password) return 0;
+
+        let points = 0;
+        if (password.length >= MIN_PASSWORD_LENGTH) points++;
+        if (password.length >= 12) points++;
+        if (/[a-z]/.test(password) && /[A-Z]/.test(password)) points++;
+        if (/\d/.test(password)) points++;
+        if (/[^A-Za-z0-9]/.test(password)) points++;
+
+        // короткий пароль никогда не может быть "сильным"
+        if (password.length < MIN_PASSWORD_LENGTH) return 1;
+
+        if (points <= 2) return 1;
+        if (points === 3) return 2;
+        return 3;
+    }
+
+    function renderPasswordStrength(password) {
+        const bars = [bar1, bar2, bar3];
+        const level = STRENGTH_LEVELS[calcPasswordStrength(password)];
+
+        bars.forEach((bar, index) => {
+            if (!bar) return;
+            bar.style.backgroundColor = index < level.bars ? level.color : "#E0E0E0";
+        });
+
+        if (strengthText) {
+            strengthText.textContent = password ? level.text : "Weak";
+            strengthText.style.color = password ? level.color : "#666";
+        }
+    }
+
+    if (signUpPassword) {
+        signUpPassword.addEventListener("input", () => {
+            renderPasswordStrength(signUpPassword.value);
+            if (signUpError) signUpError.style.display = "none";
+        });
+    }
+
     if (accountBtn) {
         accountBtn.addEventListener("click", (e) => {
             e.preventDefault();
@@ -98,6 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (signUpForm) signUpForm.reset();
         if (signInError) signInError.style.display = "none";
         if (signUpError) signUpError.style.display = "none";
+        renderPasswordStrength("");
     }
 
     if (toSignInBtn) toSignInBtn.addEventListener("click", () => showStep(authStepSignIn));
@@ -110,6 +160,13 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             const login = signUpEmail.value.trim();
             const password = signUpPassword.value;
+
+            if (password.length < MIN_PASSWORD_LENGTH) {
+                signUpError.textContent = `Password must be at least ${MIN_PASSWORD_LENGTH} characters long.`;
+                signUpError.style.display = "block";
+                signUpPassword.focus();
+                return;
+            }
 
             try {
                 const response = await fetch('/api/auth/signup', {
@@ -167,16 +224,33 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    renderPasswordStrength("");
+
     function renderAuthorizedDropdown(loginOrEmail) {
         if (!accountDropdown) return;
         accountDropdown.innerHTML = `
           <div class="acc-user-info">
             <span class="acc-user-email">${loginOrEmail}</span>
           </div>
+          <div class="acc-links-section">
+            <a href="#" class="acc-link-item" id="dropdownOrdersBtn">Order History</a>
+          </div>
           <div class="acc-logout-section">
             <button class="acc-logout-btn" id="dropdownLogoutBtn">Sign Out</button>
           </div>
         `;
+        const ordersBtn = document.getElementById("dropdownOrdersBtn");
+        if (ordersBtn) {
+            ordersBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                accountDropdown.classList.remove("show");
+                const user = getCurrentUser();
+                if (user && window.openOrderHistory) {
+                    window.openOrderHistory(user.id);
+                }
+            });
+        }
+
         const logoutBtn = document.getElementById("dropdownLogoutBtn");
         if (logoutBtn) {
             logoutBtn.addEventListener("click", () => {

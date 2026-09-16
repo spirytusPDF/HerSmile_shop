@@ -1016,3 +1016,291 @@ body {
         height: 80%;
     }
 }
+
+/* ============================================================
+   HOVER EFFECTS, FADE-IN, SEARCH & ORDER HISTORY
+   ============================================================ */
+
+/* --- search --- */
+.search-btn {
+    transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.search-btn:hover {
+    background: var(--bordeaux);
+    transform: scale(1.05);
+}
+
+.search-btn:hover img {
+    filter: invert(1) brightness(2);
+}
+
+.search-box:focus-within {
+    border-color: var(--bordeaux);
+}
+
+/* --- product cards --- */
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 26px rgba(43, 43, 43, 0.22);
+    border-color: var(--bordeaux);
+}
+
+.quick-add-btn {
+    font-family: 'Galathea Two', 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+    width: 100%;
+    background: #6A0809;
+    color: #F4EFE0;
+    border: none;
+    padding: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    text-transform: uppercase;
+    margin-top: 5px;
+    transition: background 0.25s ease, transform 0.2s ease, letter-spacing 0.25s ease;
+}
+
+.quick-add-btn:hover {
+    background: var(--bordeaux-hover);
+    transform: scale(1.04);
+    letter-spacing: 1px;
+}
+
+.quick-add-btn:active {
+    transform: scale(0.98);
+}
+
+/* --- product detail buttons --- */
+.back-to-catalog-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.back-to-catalog-btn:hover {
+    color: var(--bordeaux);
+    transform: translateX(-4px);
+}
+
+.add-to-cart-detail-btn {
+    font-family: 'Galathea Two', 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+    font-size: 16px;
+    width: 100%;
+    background: #6A0809;
+    color: #F4EFE0;
+    padding: 14px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.add-to-cart-detail-btn:hover {
+    background: var(--bordeaux-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(71, 10, 11, 0.3);
+}
+
+.clear-filter-btn {
+    background: none;
+    border: 1px solid #6A0809;
+    color: #6A0809;
+    font-family: inherit;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.clear-filter-btn:hover {
+    background: var(--bordeaux);
+    color: #F4EFE0;
+    transform: scale(1.05);
+}
+
+/* --- generic button lift --- */
+.auth-submit-btn,
+.auth-main-btn,
+.footer-modal-cta {
+    transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.auth-submit-btn:hover,
+.auth-main-btn:hover,
+.footer-modal-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(43, 43, 43, 0.18);
+}
+
+.icon-btn {
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.icon-btn:hover {
+    transform: scale(1.12);
+}
+
+.close-modal-btn {
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.close-modal-btn:hover {
+    transform: rotate(90deg) scale(1.1);
+}
+
+/* --- smooth fade-in for cards after fetch --- */
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-card {
+    opacity: 0;
+    animation: cardFadeIn 0.45s ease forwards;
+}
+
+/* при наведении анимация уже закончилась, поэтому transform не конфликтует */
+@media (prefers-reduced-motion: reduce) {
+    .fade-in-card {
+        opacity: 1;
+        animation: none;
+    }
+}
+
+/* --- order history --- */
+.orders-modal-card {
+    width: 520px;
+    max-width: 92%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.orders-loading {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    padding: 20px 0;
+}
+
+.orders-empty {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.orders-empty-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.orders-empty-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.orders-empty-text {
+    color: #666;
+    font-size: 14px;
+}
+
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.order-card {
+    border: 1px solid var(--pistachio);
+    border-radius: 6px;
+    padding: 14px 16px;
+    background: #FFF;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.order-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(43, 43, 43, 0.15);
+}
+
+.order-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #EEE;
+}
+
+.order-number {
+    font-weight: 700;
+    color: var(--bordeaux);
+    font-size: 15px;
+}
+
+.order-date {
+    font-size: 13px;
+    color: #777;
+}
+
+.order-items-list {
+    list-style: none;
+    margin: 10px 0 0 0;
+    padding: 0;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #F3F3F3;
+}
+
+.order-item-img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    background: #F9F9F9;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.order-item-name {
+    flex-grow: 1;
+    font-size: 14px;
+    color: #111;
+}
+
+.order-item-price {
+    font-weight: 700;
+    color: #6A0809;
+    font-size: 14px;
+}
+
+.order-total {
+    text-align: right;
+    margin-top: 12px;
+    font-size: 15px;
+    color: var(--text-dark);
+}

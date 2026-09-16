@@ -29,8 +29,8 @@
 
         <div class="header-center">
             <div class="search-box">
-                <input type="text" placeholder="Search products...">
-                <button type="button" class="search-btn">
+                <input type="text" id="searchInput" placeholder="Search products...">
+                <button type="button" class="search-btn" id="searchBtn">
                     <img src="images/search.jpg" alt="Search">
                 </button>
             </div>
@@ -208,6 +208,14 @@
         </div>
     </div>
 </div>
+<div class="auth-modal-overlay" id="ordersModal">
+    <div class="auth-modal-card orders-modal-card">
+        <button class="close-modal-btn" id="closeOrdersModal">&times;</button>
+        <h2 class="auth-title" style="text-align: center; margin-bottom: 20px;">Order History</h2>
+        <div id="ordersModalContent"></div>
+    </div>
+</div>
+
 <div class="auth-modal-overlay" id="articleModal">
     <div class="auth-modal-card article-modal-card">
         <button class="close-modal-btn" id="closeArticleModal">&times;</button>
@@ -219,6 +227,7 @@
 <script src="js/auth.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/shop.js"></script>
+<script src="js/orders.js"></script>
 <script src="js/articles.js"></script>
 
 <footer class="site-footer">
