@@ -24,14 +24,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const title = category ? (titleMap[category] || category) : "Our Products";
 
         let gridHtml = products.map(product => `
-            <div class="product-card" data-id="${product.id}" style="cursor: pointer; background: #fff; padding: 15px; border-radius: 4px; border: 1px solid #eee; transition: box-shadow 0.3s;">
-                <div style="position: relative; height: 220px; display: flex; align-items: center; justify-content: center; background: #f9f9f9; margin-bottom: 12px;">
-                    <img src="${product.image}" alt="${product.name}" style="max-height: 100%; max-width: 100%; object-fit: contain;">
-                </div>
-                <div style="font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 4px;">${product.brand}</div>
-                <h3 style="font-size: 15px; font-weight: 600; margin-bottom: 8px; color: #111; line-height: 1.3;">${product.name}</h3>
-                <div style="font-size: 16px; font-weight: bold; color: #d00; margin-bottom: 12px;">$${product.price}</div>
-                <button class="quick-add-btn" data-id="${product.id}" style="width: 100%; background: #6A0809; color: #F4EFE0; border: none; padding: 8px; font-size: 13px; font-weight: bold; cursor: pointer; border-radius: 4px; text-transform: uppercase;">
+            <div class="product-card" data-id="${product.id}" style="cursor: pointer; background: #b3bf85; padding: 15px; border-radius: 4px; border: 1px solid #ffe0cb; transition: box-shadow 0.3s;">
+                <div style="position: relative; height: 220px; display: flex; align-items: center; justify-content: center; background: #f1e5c5; margin-bottom: 12px;border-radius: 4px;">
+                    <img src="${product.image}" alt="${product.name}" style="  width: 100%;height: 100%;object-fit: cover;">
+                    </div>
+                <div style="font-size: 15px; color: #fff2b2; text-transform: uppercase; margin-bottom: 4px;">${product.brand}</div>
+                <div style="background: #f1e5c5; padding: 2px;border-radius: 4px; "><h3 style="font-size: 17px; font-weight: 600; margin-bottom: 8px;margin-left:3px; color: #1e1616; line-height: 1.3;">${product.name}</h3>
+                <div style="font-size: 16px; font-weight: bold; color: #d00; margin-bottom: 12px;margin-left:4px;">$${product.price}</div></div>
+                
+                <button class="quick-add-btn" data-id="${product.id}" style="font-family: 'Galathea Two', 'Cormorant Garamond', 'Playfair Display', Georgia, serif;width: 100%; background: #6A0809; color: #F4EFE0; border: none; padding: 8px; font-size: 15px; font-weight: bold; cursor: pointer; border-radius: 4px; text-transform: uppercase;margin-top:5px">
                     Add to cart
                 </button>
             </div>
@@ -136,27 +137,27 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                     <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start;">
                         <div style="flex: 1; min-width: 280px;">
-                            <p style="font-size: 12px; color: #888; text-transform: uppercase; margin-bottom: 5px;">${product.brand} / ${product.category}</p>
-                            <h1 style="font-size: 26px; font-weight: bold; color: #111; margin-bottom: 15px;">${product.name}</h1>
-                            <div style="font-size: 24px; font-weight: bold; color: #d00; margin-bottom: 25px;">$${product.price}</div>
+                            <p style="font-family: 'Galathea Two', 'Cormorant Garamond', 'Playfair Display', Georgia, serif;font-size: 12px;font-weight: bold; color: #888; text-transform: uppercase; margin-bottom: 5px;">${product.brand} / ${product.category}</p>
+                            <h1 style="font-family: 'Galathea Two', 'Cormorant Garamond', 'Playfair Display', Georgia, serif;font-size: 26px; font-weight: bold; color: #111; margin-bottom: 15px;">${product.name}</h1>
+                            <div style="font-size: 24px; font-weight: bold; color: #1e1616; margin-bottom: 25px;">$${product.price}</div>
                             
-                            <button id="addToCartDetail" style="width: 100%; background: #6A0809; color: #F4EFE0; padding: 14px; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; border-radius: 6px;">
+                            <button id="addToCartDetail" style="font-family: 'Galathea Two', 'Cormorant Garamond', 'Playfair Display', Georgia, serif;font-size: 16px; width: 100%; background: #6A0809; color: #F4EFE0; padding: 14px; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; border-radius: 6px;">
                                 Add to cart
                             </button>
                             
                             <p style="font-size: 13px; color: #28a745;">✓ In stock</p>
                         </div>
 
-                        <div style="flex: 1.5; min-width: 300px; display: flex; justify-content: center; align-items: center; background: #fff; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
+                        <div style="flex: 1.5; min-width: 300px; display: flex; justify-content: center; align-items: center; background: #fff4e0; padding: 20px; border: 1px solid #470a0b; border-radius: 8px;">
                             <img src="${product.image}" alt="${product.name}" style="max-height: 380px; max-width: 100%; object-fit: contain;">
                         </div>
                     </div>
 
                     <div style="margin-top: 50px; border-top: 1px solid #eee; padding-top: 30px;">
-                        <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #222;">Description & Characteristics</h3>
+                        <h3 style="font-family: 'Galathea Two', 'Cormorant Garamond', 'Playfair Display', Georgia, serif;font-size: 20px; font-weight: bold; margin-bottom: 15px; color: #222;">Description & Characteristics</h3>
                         <div style="display: grid; grid-template-columns: 150px 1fr; gap: 12px; font-size: 14px; color: #333; max-width: 700px;">
                             <div style="color: #777;">Brand:</div>
-                            <div>${product.brand}</div>
+                            <div style="font-family: 'Galathea Two', 'Cormorant Garamond', 'Playfair Display', Georgia, serif;font-size: 18px;">${product.brand}</div>
 
                             <div style="color: #777;">Category:</div>
                             <div>${product.category}</div>
