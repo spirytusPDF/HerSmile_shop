@@ -2,9 +2,192 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HerSmile — Cosmetics & Perfumes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <h2>Hello!</h2>
+
+<div class="page-wrapper" id="pageWrapper">
+
+    <header class="header">
+        <div class="header-left">
+            <div class="menu-dropdown">
+                <button class="menu-btn" id="menuToggle">Menu ☰</button>
+                <ul class="dropdown-content" id="dropdownMenu">
+                    <li><a href="#perfumes">Perfumes</a></li>
+                    <li><a href="#makeup">Makeup</a></li>
+                </ul>
+            </div>
+            <a href="/" class="logo-link">
+                <img src="images/logo(1).png" alt="HerSmile Logo" class="logo">
+            </a>
+        </div>
+
+        <div class="header-center">
+            <div class="search-box">
+                <input type="text" placeholder="Search products...">
+                <button type="button" class="search-btn">
+                    <img src="images/search.jpg" alt="Search">
+                </button>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <div class="user-actions">
+                <button class="icon-btn" id="cartBtn" title="Cart">
+                    <img src="images/basket.jpg" alt="Cart">
+                </button>
+
+                <div class="account-container">
+                    <button class="icon-btn" id="accountBtn" title="Account">
+                        <img src="images/acount.jpg" alt="Account">
+                    </button>
+                    <div class="account-dropdown" id="accountDropdown"></div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="carousel-container">
+
+            <div class="carousel-slide fade">
+                <a href="#perfumes" class="slide-card">
+                    <div class="img-wrapper">
+                        <img src="images/anasta.kar.png" alt="Perfumes Collection 1">
+                        <div class="img-dark-overlay"></div>
+                        <div class="hover-overlay">
+                            <img src="images/logo(1).png" alt="HerSmile Logo" class="overlay-logo">
+                            <p class="overlay-quote">“Perfume is the indispensable complement to the personality of women.”</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="carousel-slide fade">
+                <a href="#perfumes" class="slide-card">
+                    <div class="img-wrapper">
+                        <img src="images/vika.kar.png" alt="Perfumes Collection 2">
+                        <div class="img-dark-overlay"></div>
+                        <div class="hover-overlay">
+                            <img src="images/logo(1).png" alt="HerSmile Logo" class="overlay-logo">
+                            <p class="overlay-quote">“A fragrance is an unspoken emotion wrapped in elegance.”</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="carousel-slide fade">
+                <a href="#makeup" class="slide-card">
+                    <div class="img-wrapper">
+                        <img src="images/ira.kar.png" alt="Makeup Collection 1">
+                        <div class="img-dark-overlay"></div>
+                        <div class="hover-overlay">
+                            <img src="images/logo(1).png" alt="HerSmile Logo" class="overlay-logo">
+                            <p class="overlay-quote">“Beauty begins the moment you decide to be yourself.”</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="carousel-slide fade">
+                <a href="#makeup" class="slide-card">
+                    <div class="img-wrapper">
+                        <img src="images/liza.kar.png" alt="Makeup Collection 2">
+                        <div class="img-dark-overlay"></div>
+                        <div class="hover-overlay">
+                            <img src="images/logo(1).png" alt="HerSmile Logo" class="overlay-logo">
+                            <p class="overlay-quote">“Enhance your glow and smile with confidence every day.”</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <button class="prev-btn" id="prevSlide">&#10094;</button>
+            <button class="next-btn" id="nextSlide">&#10095;</button>
+        </section>
+
+        <div id="catalogContainer"></div>
+    </main>
+
+</div>
+
+<div class="auth-modal-overlay" id="authModal">
+    <div class="auth-modal-card">
+        <button class="close-modal-btn" id="closeModal">&times;</button>
+
+        <div id="authStepChoice" class="auth-step" style="display: none;">
+            <h2 class="auth-title">My Account</h2>
+            <p class="auth-subtitle">Sign in to view your order history</p>
+            <div class="auth-choice-buttons">
+                <button class="auth-main-btn" id="toSignInBtn">Sign In</button>
+                <button class="auth-main-btn outline" id="toSignUpBtn">Sign Up</button>
+            </div>
+        </div>
+
+        <div id="authStepSignIn" class="auth-step" style="display: none;">
+            <h2 class="auth-title">Sign In</h2>
+            <form id="signInForm" class="auth-form">
+                <div class="form-group">
+                    <label>Email or Phone</label>
+                    <input type="text" id="signInEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signInPassword" placeholder="Enter your password" required>
+                </div>
+                <div id="signInError" class="auth-error-box" style="display: none;"></div>
+                <button type="submit" class="auth-submit-btn">Sign In</button>
+                <p class="auth-switch-text">Don't have an account? <a href="#" id="switchSignUp">Sign Up</a></p>
+            </form>
+        </div>
+
+        <div id="authStepSignUp" class="auth-step" style="display: none;">
+            <h2 class="auth-title">Sign Up</h2>
+            <form id="signUpForm" class="auth-form">
+                <div class="form-group">
+                    <label>Email or Phone</label>
+                    <input type="text" id="signUpEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password (min. 8 characters)</label>
+                    <input type="password" id="signUpPassword" placeholder="Create a password" required>
+                    <div class="password-strength-container">
+                        <div class="strength-bars">
+                            <div class="bar" id="bar1"></div>
+                            <div class="bar" id="bar2"></div>
+                            <div class="bar" id="bar3"></div>
+                        </div>
+                        <span id="strengthText" class="strength-text">Weak</span>
+                    </div>
+                </div>
+                <div id="signUpError" class="auth-error-box" style="display: none;"></div>
+                <button type="submit" class="auth-submit-btn">Sign Up</button>
+                <p class="auth-switch-text">Already have an account? <a href="#" id="switchSignIn">Sign In</a></p>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<div class="auth-modal-overlay" id="cartModal">
+    <div class="auth-modal-card cart-modal-card">
+        <button class="close-modal-btn" id="closeCartModal">&times;</button>
+        <h2 class="auth-title" style="text-align: center; margin-bottom: 20px;">Cart</h2>
+
+        <div id="cartModalContent">
+        </div>
+    </div>
+</div>
+
+<script src="js/script.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/shop.js"></script>
 </body>
 </html>
