@@ -112,6 +112,30 @@
             <button class="next-btn" id="nextSlide">&#10095;</button>
         </section>
 
+        <section class="feature-articles">
+            <div class="feature-card" id="featureCard1">
+                <div class="feature-img-wrapper">
+                    <img src="images/towar1.jpg" alt="Top Picks Article 1">
+                    <div class="feature-dark-overlay"></div>
+                    <div class="feature-label">
+                        <span class="feature-label-title">Editor's Pick</span>
+                        <span class="feature-label-sub">Discover the story →</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card" id="featureCard2">
+                <div class="feature-img-wrapper">
+                    <img src="images/towar2.jpg" alt="Top Picks Article 2">
+                    <div class="feature-dark-overlay"></div>
+                    <div class="feature-label">
+                        <span class="feature-label-title">Editor's Pick</span>
+                        <span class="feature-label-sub">Discover the story →</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div id="catalogContainer"></div>
     </main>
 
@@ -184,10 +208,42 @@
         </div>
     </div>
 </div>
+<div class="auth-modal-overlay" id="articleModal">
+    <div class="auth-modal-card article-modal-card">
+        <button class="close-modal-btn" id="closeArticleModal">&times;</button>
+        <div id="articleModalContent"></div>
+    </div>
+</div>
 
 <script src="js/script.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/shop.js"></script>
+<script src="js/articles.js"></script>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-col">
+            <h3 class="footer-title">About us</h3>
+            <ul class="footer-list">
+                <li><a data-footer-page="privacy">Privacy Policy</a></li>
+                <li><a data-footer-page="delivery">About delivery</a></li>
+                <li><a data-footer-page="products">About products</a></li>
+                <li><a data-footer-page="perfumes">Perfumes</a></li>
+                <li><a data-footer-page="makeup">Makeup</a></li>
+                <li><a data-footer-page="contacts">Contacts</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<div id="footerModal" class="auth-modal-overlay">
+    <div class="auth-modal-card footer-modal-card">
+        <button id="closeFooterModal" class="close-modal-btn">&times;</button>
+        <div id="footerModalContent"></div>
+    </div>
+</div>
+
+<script src="js/footer.js"></script>
 </body>
 </html>

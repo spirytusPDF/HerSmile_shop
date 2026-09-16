@@ -1,11 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
     const catalogContainer = document.getElementById("catalogContainer");
     const carouselContainer = document.querySelector(".carousel-container");
+    const featureArticles = document.querySelector(".feature-articles");
+    const siteFooter = document.querySelector(".site-footer");
+
+    function showFooter() {
+        if (siteFooter) siteFooter.style.display = "";
+    }
+
+    function hideFooter() {
+        if (siteFooter) siteFooter.style.display = "none";
+    }
 
     async function loadCatalog(category) {
         if (!catalogContainer) return;
 
         if (carouselContainer) carouselContainer.style.display = category ? "none" : "block";
+        if (featureArticles) featureArticles.style.display = category ? "none" : "flex";
+
+        showFooter();
 
         try {
             const url = category
@@ -25,9 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let gridHtml = products.map(product => `
             <div class="product-card" data-id="${product.id}" style="cursor: pointer; background: #b3bf85; padding: 15px; border-radius: 4px; border: 1px solid #ffe0cb; transition: box-shadow 0.3s;">
-                <div style="position: relative; height: 220px; display: flex; align-items: center; justify-content: center; background: #f1e5c5; margin-bottom: 12px;border-radius: 4px;">
-                    <img src="${product.image}" alt="${product.name}" style="  width: 100%;height: 100%;object-fit: cover;">
-                    </div>
+<div class="product-img-wrapper" style="position: relative; height: 220px; display: flex; align-items: center; justify-content: center; background: #f1e5c5; margin-bottom: 12px;border-radius: 4px; overflow: hidden;">
+    <img class="product-img" src="${product.image}" alt="${product.name}" style="width: 100%;height: 100%;object-fit: cover;">
+</div>
                 <div style="font-size: 15px; color: #fff2b2; text-transform: uppercase; margin-bottom: 4px;">${product.brand}</div>
                 <div style="background: #f1e5c5; padding: 2px;border-radius: 4px; "><h3 style="font-size: 17px; font-weight: 600; margin-bottom: 8px;margin-left:3px; color: #1e1616; line-height: 1.3;">${product.name}</h3>
                 <div style="font-size: 16px; font-weight: bold; color: #d00; margin-bottom: 12px;margin-left:4px;">$${product.price}</div></div>
@@ -123,13 +136,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    async function loadProductDetail(id) {
+    async function loadProductDetail(id, fromArticle) {
         try {
             const response = await fetch(`/api/products/${id}`);
             if (!response.ok) throw new Error("Product not found");
             const product = await response.json();
 
             if (carouselContainer) carouselContainer.style.display = "none";
+            if (featureArticles) featureArticles.style.display = fromArticle ? "flex" : "none";
+
+            hideFooter();
 
             catalogContainer.innerHTML = `
                 <div style="max-width: 1000px; margin: 40px auto; padding: 0 20px; font-family: sans-serif; width: 100%;">
@@ -184,6 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     window.loadCatalogByCategory = loadCatalog;
+    window.loadProductDetailById = (id) => loadProductDetail(id, true);
 
     const urlParams = new URLSearchParams(window.location.search);
     const productIdParam = urlParams.get("id");
