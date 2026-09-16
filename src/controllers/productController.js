@@ -34,10 +34,39 @@ const getProductById = async (req, res) => {
     }
 };
 
+
+
+const searchProducts = async (req, res) => {
+    try {
+        const { search } = req.query;
+        if (!search) {
+            return res.json([]);
+        }
+
+
+
+        const match = await prisma.product
+            .findMany({
+                    where: {
+                        OR: [
+                            { name: { contains: search, mode: 'insensitive' } },
+                            { description: { contains: search, mode: 'insensitive' } },
+                            { brand: { contains: search, mode: 'insensitive' } }
+                        ]
+                    }
+        });
+
+        return res.json(match);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to find product' });
+    }
+}
+
 module.exports = {
     getAllProducts,
-    getProductById
+    getProductById,
+    searchProducts
 };
-
-
 
