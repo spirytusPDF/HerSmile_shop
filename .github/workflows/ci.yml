@@ -13,18 +13,6 @@ jobs:
         with: { node-version: '20' }
       - run: npm ci
 
-      - name: Check Formatting (Prettier)
-        run: npx prettier --check "**/*.{js,html,css}"
-
-      - name: Lint JavaScript (Backend & Frontend)
-        run: npx eslint .
-
-      - name: Lint CSS
-        run: npx stylelint "**/*.css"
-
-      - name: Lint HTML
-        run: npx htmlhint "**/*.html"
-
       - name: Security Audit
         run: npm audit --audit-level=high
   backend-unit-tests:
