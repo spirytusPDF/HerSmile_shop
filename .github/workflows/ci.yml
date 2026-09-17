@@ -12,9 +12,19 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: '20' }
       - run: npm ci
+      - name: Lint JavaScript (Backend & Frontend)
+        run: npx eslint .
+
+      - name: Lint CSS
+        run: npx stylelint "**/*.css"
+
+      - name: Lint HTML
+        run: npx htmlhint "**/*.html"
+
+      - name: Security Audit
+        run: npm audit --audit-level=low
 
   backend-unit-tests:
-    needs: audit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,10 +32,9 @@ jobs:
       - run: npm ci
 
       - name: Run Node.js Unit Tests
-        run: npm run test:unit
+        run: npm run test
 
   e2e-browser-tests:
-    needs: backend-unit-tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
