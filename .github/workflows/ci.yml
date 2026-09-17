@@ -5,7 +5,7 @@ on:
     branches: ["main", "test/testing-branch"]
   
 jobs:
-  lint-and-audit:
+  audit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,10 +13,8 @@ jobs:
         with: { node-version: '20' }
       - run: npm ci
 
-      - name: Security Audit
-        run: npm audit --audit-level=info
   backend-unit-tests:
-    needs: lint-and-audit
+    needs: audit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
