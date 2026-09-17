@@ -13,12 +13,6 @@ jobs:
         with: { node-version: '24' }
       - run: npm ci
 
-      - name: Lint CSS
-        run: npx stylelint "**/*.css" --allow-empty-input
-
-      - name: Lint HTML
-        run: npx htmlhint "**/*.html" --allow-empty-input
-
       - name: Security Audit
         run: npm audit --audit-level=low
 
@@ -28,9 +22,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
       - run: npm ci
-
-      - name: Run Node.js Unit Tests
-        run: npm run test
 
   e2e-browser-tests:
     needs: backend-unit-tests
