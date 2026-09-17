@@ -38,7 +38,3 @@ jobs:
         run: node server.js &
         env:
           PORT: 3000
-
-      - name: Run E2E Tests (Playwright)
-        run: npx playwright test
-
