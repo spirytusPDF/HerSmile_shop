@@ -5,19 +5,58 @@ on:
     branches: ["main", "test/testing-branch"]
   
 jobs:
-  test:
+  lint-and-audit:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Завантажити код
-        uses: actions/checkout@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm ci
 
-      - name: Встановити Node.js
-        uses: actions/setup-node@v5
-        with:
-          node-version: 24
-          cache: npm
+      - name: Check Formatting (Prettier)
+        run: npx prettier --check "**/*.{js,html,css}"
 
-      - name: Встановити залежності
-        run: npm ci
+      - name: Lint JavaScript (Backend & Frontend)
+        run: npx eslint .
+
+      - name: Lint CSS
+        run: npx stylelint "**/*.css"
+
+      - name: Lint HTML
+        run: npx htmlhint "**/*.html"
+
+      - name: Security Audit
+        run: npm audit --audit-level=high
+  backend-unit-tests:
+    needs: lint-and-audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - run: npm ci
+
+      - name: Run Node.js Unit Tests
+        run: npm run test:unit
+
+  e2e-browser-tests:
+    needs: backend-unit-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - run: npm ci
+      
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Start Node.js Server
+        run: node server.js &
+        env:
+          PORT: 3000
+
+      - name: Wait for server
+        run: npx wait-on http://localhost:3000
+
+      - name: Run E2E Tests (Playwright)
+        run: npx playwright test
 
