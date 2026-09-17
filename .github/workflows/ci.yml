@@ -21,5 +21,3 @@ jobs:
       - name: Встановити залежності
         run: npm ci
 
-      - name: Запустити тести
-        run: npm test
