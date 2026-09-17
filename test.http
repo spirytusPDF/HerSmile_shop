@@ -1,1 +1,6 @@
-GET http://localhost:3000/api/products/search?search=mascara
+POST http://localhost:3000/api/chat
+Content-Type: application/json
+
+{
+  "message": "I am looking for a light floral perfume with rose notes for daytime wear."
+}
