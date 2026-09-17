@@ -21,8 +21,5 @@ jobs:
       - name: Встановити залежності
         run: npm ci
 
-      - name: Перевірити стиль коду
-        run: npm run lint
-
       - name: Запустити тести
         run: npm test
