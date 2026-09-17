@@ -14,10 +14,10 @@ jobs:
       - run: npm ci
 
       - name: Lint CSS
-        run: npm exec --no-install -- stylelint "**/*.css"
+        run: npm run lint:css
 
       - name: Lint HTML
-        run: npm exec --no-install -- htmlhint "**/*.html"
+        run: npm run lint:html
 
       - name: Security Audit
         run: npm audit --audit-level=low
