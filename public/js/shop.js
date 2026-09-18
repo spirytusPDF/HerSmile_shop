@@ -162,12 +162,22 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    function promptSignInForCart() {
+        if (window.showToast) {
+            window.showToast("Please sign in first to add items to your cart.", {
+                type: "info",
+                actionText: "Sign in",
+                onAction: () => window.openAuthModal()
+            });
+        } else {
+            window.openAuthModal();
+        }
+    }
+
     async function addToCart(productId) {
         const userJson = localStorage.getItem("hersmile_current_user");
         if (!userJson) {
-            alert("Please sign in first!");
-            const authModal = document.getElementById("authModal");
-            if (authModal) authModal.classList.add("active");
+            promptSignInForCart();
             return;
         }
 
@@ -177,9 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (err) {
             console.error("Error parsing user data", err);
             localStorage.removeItem("hersmile_current_user");
-            alert("Please sign in first!");
-            const authModal = document.getElementById("authModal");
-            if (authModal) authModal.classList.add("active");
+            promptSignInForCart();
             return;
         }
 
@@ -193,13 +201,23 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = await res.json();
 
             if (res.ok) {
-                alert("Product added to cart successfully!");
+                if (window.showToast) {
+                    window.showToast("Successfully added to cart! Go to your cart to check out.", {
+                        type: "success",
+                        actionText: "View cart",
+                        onAction: () => { if (window.openAndLoadCart) window.openAndLoadCart(user.id); }
+                    });
+                }
             } else {
-                alert("Server error: " + (data.error || data.message || "Unknown error"));
+                if (window.showToast) {
+                    window.showToast("Server error: " + (data.error || data.message || "Unknown error"), { type: "error" });
+                }
             }
         } catch (e) {
             console.error("Network or catch error:", e);
-            alert("Network error: " + e.message);
+            if (window.showToast) {
+                window.showToast("Network error: " + e.message, { type: "error" });
+            }
         }
     }
 

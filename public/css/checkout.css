@@ -1,0 +1,285 @@
+/* ============================================================
+   CART: header row + select mode
+   ============================================================ */
+
+.cart-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.cart-title {
+    font-family: 'Galathea Two', 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    color: var(--bordeaux);
+}
+
+.cart-select-toggle-btn {
+    background: none;
+    border: 1px solid var(--bordeaux);
+    color: var(--bordeaux);
+    padding: 6px 16px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.cart-select-toggle-btn:hover,
+.cart-select-toggle-btn.active {
+    background: var(--bordeaux);
+    color: var(--ivory);
+}
+
+.cart-items-list {
+    max-height: 320px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding-right: 5px;
+}
+
+.cart-item-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item-checkbox {
+    display: none;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--bordeaux);
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.cart-modal-select-mode .cart-item-checkbox {
+    display: inline-block;
+}
+
+.cart-item-img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    background: #f9f9f9;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.cart-item-info {
+    flex-grow: 1;
+}
+
+.cart-item-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #111;
+}
+
+.cart-item-price {
+    font-weight: bold;
+    color: #6A0809;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   CART: action bar (Checkout <-> Delete/Pay split animation)
+   ============================================================ */
+
+.cart-actions-bar {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.cart-checkout-btn,
+.cart-delete-btn,
+.cart-pay-btn {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 0;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    overflow: hidden;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: flex-basis 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 0.3s ease, padding 0.3s ease, background 0.2s ease;
+}
+
+.cart-checkout-btn {
+    background: var(--bordeaux);
+    color: var(--ivory);
+    flex-basis: 100%;
+}
+
+.cart-checkout-btn:hover {
+    background: var(--bordeaux-hover);
+}
+
+.cart-delete-btn {
+    background: var(--bordeaux);
+    color: var(--ivory);
+    flex-basis: 0%;
+    opacity: 0;
+    padding: 0;
+    pointer-events: none;
+}
+
+.cart-pay-btn {
+    background: var(--pistachio);
+    color: var(--bordeaux);
+    flex-basis: 0%;
+    opacity: 0;
+    padding: 0;
+    pointer-events: none;
+}
+
+.cart-actions-bar.split .cart-checkout-btn {
+    flex-basis: 0%;
+    opacity: 0;
+    padding: 0;
+    pointer-events: none;
+}
+
+.cart-actions-bar.split .cart-delete-btn,
+.cart-actions-bar.split .cart-pay-btn {
+    flex-basis: 50%;
+    opacity: 1;
+    padding: 12px 0;
+    pointer-events: auto;
+}
+
+.cart-delete-btn:hover { background: var(--bordeaux-hover); }
+.cart-pay-btn:hover { filter: brightness(0.93); }
+
+/* ============================================================
+   CHECKOUT FLOW
+   ============================================================ */
+
+.checkout-overlay { z-index: 1100; }
+
+.checkout-modal-card {
+    max-width: 520px;
+    width: 92%;
+    max-height: 85vh;
+    overflow-y: auto;
+    text-align: left;
+}
+
+.checkout-step-title {
+    font-family: 'Galathea Two', 'Cormorant Garamond', Georgia, serif;
+    font-size: 24px;
+    color: var(--bordeaux);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.checkout-order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 14px;
+    max-height: 220px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.checkout-order-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.checkout-order-item img {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+    background: #f9f9f9;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.checkout-order-item-name {
+    flex-grow: 1;
+    font-size: 14px;
+    color: #111;
+}
+
+.checkout-order-item-price {
+    font-weight: 700;
+    color: #6A0809;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.checkout-order-total {
+    text-align: right;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-dark);
+    padding-top: 10px;
+    border-top: 1px solid var(--pistachio);
+    margin-bottom: 24px;
+}
+
+.checkout-section-subtitle {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--bordeaux);
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.checkout-city-wrapper {
+    position: relative;
+}
+
+.checkout-address-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    max-width: 360px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.checkout-address-center .form-group {
+    width: 100%;
+}
+
+.checkout-place-order-btn {
+    max-width: 260px;
+}
+
+.checkout-success-box {
+    text-align: center;
+    padding: 10px 0 20px;
+}
+
+.checkout-success-icon {
+    font-size: 46px;
+    margin-bottom: 14px;
+}
+
+.checkout-success-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-dark);
+    margin-bottom: 24px;
+}
+
+.checkout-step-fade {
+    animation: chatMsgIn 0.25s ease;
+}
