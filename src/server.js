@@ -25,6 +25,9 @@ const orderRoutes = require('./routes/orderRoutes');
 
 app.use('/api/orders', orderRoutes);
 
+const aiRoutes = require('./routes/aiRoutes');
+app.use('/api/chat', aiRoutes);
+
 app.listen(PORT, () => {
     console.log(`HerSmile Server running at http://localhost:${PORT}`);
 });
