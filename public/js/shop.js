@@ -22,8 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
             product.category,
             product.description
         ].filter(Boolean).join(" ").toLowerCase();
-
-        // все слова из запроса должны найтись
         return q.split(/\s+/).every(word => haystack.includes(word));
     }
 
@@ -43,8 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
         showFooter();
 
         try {
-            // на бэкенде нет отдельного /search, поэтому берём весь каталог
-            // существующим роутом и фильтруем на клиенте
             const response = await fetch('/api/products');
             const products = await response.json();
             const found = products.filter(product => matchesQuery(product, q));

@@ -52,9 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (step) step.style.display = "block";
     }
 
-    // Единая точка входа для открытия окна авторизации из любого файла
-    // (cart.js, shop.js и т.д.), чтобы окно всегда открывалось на
-    // правильном шаге, а не пустым.
     window.openAuthModal = function () {
         if (accountDropdown) accountDropdown.classList.remove("show");
         if (authModal) authModal.classList.add("active");
@@ -79,8 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (/[a-z]/.test(password) && /[A-Z]/.test(password)) points++;
         if (/\d/.test(password)) points++;
         if (/[^A-Za-z0-9]/.test(password)) points++;
-
-        // короткий пароль никогда не может быть "сильным"
         if (password.length < MIN_PASSWORD_LENGTH) return 1;
 
         if (points <= 2) return 1;
@@ -169,9 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const LOGIN_PHONE_REGEX = /^380\d{9}$/;
 
     function validateSignupLogin(login) {
-        // Если в логине есть "@" - считаем, что это почта, и требуем
-        // корректный email на английском. Иначе - считаем, что это
-        // украинский номер телефона в формате 380XXXXXXXXX.
         if (login.includes("@")) {
             if (!LOGIN_EMAIL_REGEX.test(login)) {
                 return "Please enter a valid email address using English letters only.";
@@ -241,9 +233,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ===== Шаг "Заполните имя и фамилию" после успешной регистрации =====
-    // Хранится только на фронтенде (localStorage), т.к. в модели User
-    // на бэкенде нет полей firstName/lastName.
     const profileForm = document.getElementById("profileForm");
     const profileFirstName = document.getElementById("profileFirstName");
     const profileLastName = document.getElementById("profileLastName");

@@ -1,5 +1,3 @@
-// Global toast notification system.
-// Usage: window.showToast("Message", { type: "success" | "error" | "info", actionText, onAction, duration })
 (function () {
     let container = null;
 

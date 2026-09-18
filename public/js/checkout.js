@@ -1,14 +1,3 @@
-// Multi-step checkout modal.
-// Call window.openCheckout(userId, cart, selectedProductIds) to start it.
-//
-// Note: the backend's /api/orders/checkout endpoint checks out the user's
-// ENTIRE cart. To support paying for only a subset of selected items while
-// leaving the rest safely in the cart, this flow:
-//   1. temporarily removes the *unselected* items from the cart via
-//      DELETE /api/cart/remove
-//   2. calls POST /api/orders/checkout (which now only sees the selected items)
-//   3. re-adds the unselected items back via POST /api/cart/add
-// This uses only the existing API endpoints, no backend changes required.
 (function () {
     const CITIES = [
         "Kyiv", "Kharkiv", "Odesa", "Dnipro", "Lviv", "Zaporizhzhia",

@@ -1,7 +1,3 @@
-/* ============================================================
-   CART: header row + select mode
-   ============================================================ */
-
 .cart-header-row {
     display: flex;
     align-items: center;
@@ -87,10 +83,6 @@
     flex-shrink: 0;
 }
 
-/* ============================================================
-   CART: action bar (Checkout <-> Delete/Pay split animation)
-   ============================================================ */
-
 .cart-actions-bar {
     display: flex;
     gap: 10px;
@@ -160,11 +152,6 @@
 
 .cart-delete-btn:hover { background: var(--bordeaux-hover); }
 .cart-pay-btn:hover { filter: brightness(0.93); }
-
-/* ============================================================
-   CHECKOUT FLOW
-   ============================================================ */
-
 .checkout-overlay { z-index: 1100; }
 
 .checkout-modal-card {

@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!toggleBtn || !chatWindow || !form || !input || !messagesEl) return;
 
-    // Ассистент подсказывает про духи (как и было задумано изначально)
     const QUICK_QUESTIONS = [
         "Recommend a perfume for everyday wear",
         "Something floral and light for spring",
