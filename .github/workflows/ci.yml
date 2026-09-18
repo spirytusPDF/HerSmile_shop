@@ -1,8 +1,8 @@
 on:
   pull_request: 
-    branches: ["main"]
+    branches: ["main", "final/documentation"]
   push:
-    branches: ["main"]
+    branches: ["main", "final/documentation"]
   
 jobs:
   audit:
