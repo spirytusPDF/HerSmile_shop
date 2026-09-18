@@ -7,27 +7,43 @@ const CATEGORY_MAP = {
 
 document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('menuToggle');
-    const dropdownMenu = document.getElementById('dropdownMenu');
+    const menuPanel = document.getElementById('menuPanel');
+    const menuPanelOverlay = document.getElementById('menuPanelOverlay');
+    const closeMenuPanel = document.getElementById('closeMenuPanel');
 
-    if (menuToggle && dropdownMenu) {
-        menuToggle.addEventListener('click', () => {
-            dropdownMenu.classList.toggle('show');
+    function openMenuPanel() {
+        if (menuPanel) menuPanel.classList.add('show');
+        if (menuPanelOverlay) menuPanelOverlay.classList.add('show');
+    }
+
+    function closeMenuPanelFunc() {
+        if (menuPanel) menuPanel.classList.remove('show');
+        if (menuPanelOverlay) menuPanelOverlay.classList.remove('show');
+    }
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openMenuPanel();
         });
+    }
 
-        window.addEventListener('click', (e) => {
-            if (!menuToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
-                dropdownMenu.classList.remove('show');
-            }
-        });
+    if (closeMenuPanel) {
+        closeMenuPanel.addEventListener('click', closeMenuPanelFunc);
+    }
 
-        dropdownMenu.querySelectorAll('a[href^="#"]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const hash = link.getAttribute('href').substring(1);
-                const category = CATEGORY_MAP[hash];
+    if (menuPanelOverlay) {
+        menuPanelOverlay.addEventListener('click', closeMenuPanelFunc);
+    }
 
-                dropdownMenu.classList.remove('show');
-                history.pushState({ category: hash }, '', `#${hash}`);
+    if (menuPanel) {
+        menuPanel.querySelectorAll('.menu-panel-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const category = option.getAttribute('data-category');
+                const hash = category === 'makeup' ? 'makeup' : 'perfumes';
+
+                closeMenuPanelFunc();
+                history.pushState({ category }, '', `#${hash}`);
 
                 if (window.loadCatalogByCategory) {
                     window.loadCatalogByCategory(category);

@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/toast.css">
+    <link rel="stylesheet" href="css/checkout.css">
 </head>
 <body>
 
@@ -16,11 +18,9 @@
     <header class="header">
         <div class="header-left">
             <div class="menu-dropdown">
-                <button class="menu-btn" id="menuToggle">Menu ☰</button>
-                <ul class="dropdown-content" id="dropdownMenu">
-                    <li><a href="#perfumes">Perfumes</a></li>
-                    <li><a href="#makeup">Makeup</a></li>
-                </ul>
+                <button class="menu-btn" id="menuToggle" aria-label="Menu">
+                    <span class="menu-btn-icon">☰</span>
+                </button>
             </div>
             <a href="/" class="logo-link">
                 <img src="images/logo(1).png" alt="HerSmile Logo" class="logo">
@@ -29,8 +29,8 @@
 
         <div class="header-center">
             <div class="search-box">
-                <input type="text" placeholder="Search products...">
-                <button type="button" class="search-btn">
+                <input type="text" id="searchInput" placeholder="Search products...">
+                <button type="button" class="search-btn" id="searchBtn">
                     <img src="images/search.jpg" alt="Search">
                 </button>
             </div>
@@ -112,10 +112,49 @@
             <button class="next-btn" id="nextSlide">&#10095;</button>
         </section>
 
+        <section class="feature-articles">
+            <div class="feature-card" id="featureCard1">
+                <div class="feature-img-wrapper">
+                    <img src="images/towar1.jpg" alt="Top Picks Article 1">
+                    <div class="feature-dark-overlay"></div>
+                    <div class="feature-label">
+                        <span class="feature-label-title">Editor's Pick</span>
+                        <span class="feature-label-sub">Discover the story →</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card" id="featureCard2">
+                <div class="feature-img-wrapper">
+                    <img src="images/towar2.jpg" alt="Top Picks Article 2">
+                    <div class="feature-dark-overlay"></div>
+                    <div class="feature-label">
+                        <span class="feature-label-title">Editor's Pick</span>
+                        <span class="feature-label-sub">Discover the story →</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div id="catalogContainer"></div>
     </main>
 
 </div>
+
+<div class="menu-panel-overlay" id="menuPanelOverlay"></div>
+<aside class="menu-panel" id="menuPanel">
+    <button class="menu-panel-close" id="closeMenuPanel">&times;</button>
+    <div class="menu-panel-options">
+        <button class="menu-panel-option" data-category="makeup">
+            <img src="images/makeup-menu.png" alt="Makeup">
+            <span>Makeup</span>
+        </button>
+        <button class="menu-panel-option" data-category="perfume">
+            <img src="images/menu.make2.png" alt="Perfumes">
+            <span>Perfumes</span>
+        </button>
+    </div>
+</aside>
 
 <div class="auth-modal-overlay" id="authModal">
     <div class="auth-modal-card">
@@ -144,6 +183,23 @@
                 <div id="signInError" class="auth-error-box" style="display: none;"></div>
                 <button type="submit" class="auth-submit-btn">Sign In</button>
                 <p class="auth-switch-text">Don't have an account? <a href="#" id="switchSignUp">Sign Up</a></p>
+            </form>
+        </div>
+        <div id="authStepProfile" class="auth-step" style="display: none;">
+            <h2 class="auth-title">Welcome to HerSmile!</h2>
+            <p class="auth-subtitle">Tell us a bit about yourself</p>
+            <form id="profileForm" class="auth-form">
+                <div class="form-group">
+                    <label>First name</label>
+                    <input type="text" id="profileFirstName" placeholder="e.g. Anna" autocomplete="given-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Last name</label>
+                    <input type="text" id="profileLastName" placeholder="e.g. Shevchenko" autocomplete="family-name" required>
+                </div>
+                <div id="profileError" class="auth-error-box" style="display: none;"></div>
+                <button type="submit" class="auth-submit-btn">Finish</button>
+                <p class="auth-switch-text"><a href="#" id="profileSkipBtn">Skip for now</a></p>
             </form>
         </div>
 
@@ -184,10 +240,75 @@
         </div>
     </div>
 </div>
+<div class="auth-modal-overlay" id="ordersModal">
+    <div class="auth-modal-card orders-modal-card">
+        <button class="close-modal-btn" id="closeOrdersModal">&times;</button>
+        <h2 class="auth-title" style="text-align: center; margin-bottom: 20px;">Order History</h2>
+        <div id="ordersModalContent"></div>
+    </div>
+</div>
 
+<div class="auth-modal-overlay" id="articleModal">
+    <div class="auth-modal-card article-modal-card">
+        <button class="close-modal-btn" id="closeArticleModal">&times;</button>
+        <div id="articleModalContent"></div>
+    </div>
+</div>
+
+<script src="js/toast.js"></script>
+<script src="js/checkout.js"></script>
 <script src="js/script.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/shop.js"></script>
+<script src="js/orders.js"></script>
+<script src="js/articles.js"></script>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-col">
+            <h3 class="footer-title">About us</h3>
+            <ul class="footer-list">
+                <li><a data-footer-page="privacy">Privacy Policy</a></li>
+                <li><a data-footer-page="delivery">About delivery</a></li>
+                <li><a data-footer-page="products">About products</a></li>
+                <li><a data-footer-page="perfumes">Perfumes</a></li>
+                <li><a data-footer-page="makeup">Makeup</a></li>
+                <li><a data-footer-page="contacts">Contacts</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<div id="footerModal" class="auth-modal-overlay">
+    <div class="auth-modal-card footer-modal-card">
+        <button id="closeFooterModal" class="close-modal-btn">&times;</button>
+        <div id="footerModalContent"></div>
+    </div>
+</div>
+
+<script src="js/footer.js"></script>
+
+<button class="ai-chat-toggle" id="aiChatToggle" title="AI Assistant" aria-label="Open AI assistant">
+    <span class="ai-chat-toggle-icon">💬</span>
+</button>
+
+<div class="ai-chat-window" id="aiChatWindow">
+    <div class="ai-chat-header">
+        <span class="ai-chat-title">HerSmile Assistant</span>
+        <button class="ai-chat-close" id="aiChatClose">&times;</button>
+    </div>
+    <div class="ai-chat-messages" id="aiChatMessages">
+        <div class="ai-chat-msg ai-chat-msg-bot">
+            Hi! I'm here to help you find the perfect product. Ask me anything ✨
+        </div>
+    </div>
+    <form class="ai-chat-input-row" id="aiChatForm">
+        <input type="text" id="aiChatInput" placeholder="Type your message..." autocomplete="off">
+        <button type="submit" class="ai-chat-send-btn" id="aiChatSendBtn" aria-label="Send message">➤</button>
+    </form>
+</div>
+
+<script src="js/ai-chat.js"></script>
 </body>
 </html>

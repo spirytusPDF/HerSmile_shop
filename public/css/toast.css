@@ -1,0 +1,108 @@
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 2000;
+    max-width: 360px;
+    width: calc(100% - 40px);
+    pointer-events: none;
+}
+
+.toast {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #FFF;
+    border: 1.5px solid var(--pistachio);
+    border-left: 5px solid var(--bordeaux);
+    border-radius: 12px;
+    padding: 12px 14px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+    font-family: 'Galathea Two', 'Cormorant Garamond', Georgia, serif;
+    font-size: 14px;
+    color: var(--text-dark);
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast.hide {
+    opacity: 0;
+    transform: translateX(30px);
+}
+
+.toast-success { border-left-color: #2E7D32; }
+.toast-error { border-left-color: #C0392B; background: #FBEAEA; }
+.toast-info { border-left-color: var(--pistachio); }
+
+.toast-icon {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: bold;
+    background: var(--bordeaux);
+    color: var(--ivory);
+}
+
+.toast-success .toast-icon { background: #2E7D32; }
+.toast-error .toast-icon { background: #C0392B; }
+.toast-info .toast-icon { background: var(--pistachio); color: var(--bordeaux); }
+
+.toast-text {
+    flex: 1;
+    line-height: 1.4;
+}
+
+.toast-action-btn {
+    flex-shrink: 0;
+    background: var(--bordeaux);
+    color: var(--ivory);
+    border: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s ease;
+}
+
+.toast-action-btn:hover {
+    background: var(--bordeaux-hover);
+}
+
+.toast-close-btn {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    font-size: 18px;
+    line-height: 1;
+    color: #999;
+    cursor: pointer;
+}
+
+.toast-close-btn:hover {
+    color: var(--bordeaux);
+}
+
+@media (max-width: 480px) {
+    .toast-container {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
